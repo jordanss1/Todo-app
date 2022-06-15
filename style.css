@@ -1,0 +1,58 @@
+body {
+	margin: 0px;
+	padding: 0px;
+	background-color: rgb(26, 26, 26);
+	height: 692px;
+}
+
+form {
+	height: 100%;
+}
+
+.todo-container {
+	height: 100%;
+}
+
+.to-do {
+	height: 75%;
+}
+
+.checkbox {
+	width:  100%;
+	display: inline;
+}
+
+.list {
+	height: 60%;
+	color: white;
+	font-size: 20px;
+	overflow-y: scroll;
+}
+
+.list input {
+	margin-right: 5px;
+}
+
+.list label {
+	width: 100%;
+	word-break: break-all;
+}
+
+.list div {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.todo-text {
+	height: 20%;
+}
+
+.todo-buttons {
+	height: 20%;
+}
+
+@media screen and (max-width: 576px) {
+	.to-do {
+	}
+}
