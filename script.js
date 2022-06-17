@@ -36,14 +36,12 @@ const pushTextValueToCheckbox = () => {
 	const divForCheckAndLabel = document.createElement("div");
  	
  	arrayOfTodoObjects.forEach(obj => {
- 		console.log(obj);
  		checkboxForTodo.type = "checkbox";
  		checkboxForTodo.id = obj.id;
  		checkboxForTodo.name = "checkbox";
  		checkboxLabelAndTodo.setAttribute("for", obj.id);
  		checkboxLabelAndTodo.innerText = obj.todo;
  		fieldForTodo.append(divForCheckAndLabel);
- 		divForCheckAndLabel.id = obj.id;
  		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
  	})
 };
@@ -51,13 +49,21 @@ const pushTextValueToCheckbox = () => {
 const deleteTodoItem = () => {
 	const form = document.forms[0];
 	const checkboxesForTodo = form.querySelectorAll("input[name=checkbox]");
+	let arrayOfTodosFromStorage = JSON.parse(localStorage.getItem("ToDo-List"));
 
 	checkboxesForTodo.forEach(checkbox => {
 		const confirmation = confirm("Do you really want to delete these items?");
-		if (checkbox.checked = true && confirmation) {
-			checkbox.remove();
-					
-		}
+
+		if (checkbox.checked && confirmation) {
+			arrayOfTodosFromStorage.forEach(obj => {
+				if (obj.id === parseInt(checkbox.id)) {
+					delete obj;
+				}
+			});
+
+			checkbox.parentElement.remove();
+			console.log(arrayOfTodosFromStorage);					
+		};
 	});
 };
 
