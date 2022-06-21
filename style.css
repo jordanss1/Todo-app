@@ -2,11 +2,19 @@ body {
 	margin: 0px;
 	padding: 0px;
 	background-color: rgb(26, 26, 26);
-	height: 692px;
+	height: 600px;
 }
 
 form {
 	height: 100%;
+}
+
+header {
+	height: 70px;
+	background-color: rgb(242, 242, 242);
+	font-family: 'Poppins', sans-serif;
+	font-weight: 400;
+	letter-spacing: 1px;
 }
 
 .todo-container {
@@ -14,7 +22,7 @@ form {
 }
 
 .to-do {
-	height: 75%;
+	height: 100%;
 }
 
 .checkbox {
@@ -23,10 +31,16 @@ form {
 }
 
 .list {
+	width: 75%;
 	height: 60%;
 	color: white;
 	font-size: 20px;
 	overflow-y: scroll;
+}
+
+.borderforcontainer {
+	border: 1px dotted white;
+	border-radius: 5px;
 }
 
 .list input {
@@ -36,6 +50,8 @@ form {
 .list label {
 	width: 100%;
 	word-break: break-all;
+	font-family: 'Anek Malayalam', sans-serif;
+	font-weight: 200;
 }
 
 .list div {
@@ -45,11 +61,11 @@ form {
 }
 
 .todo-text {
-	height: 20%;
+	height: 15%;
 }
 
 .todo-buttons {
-	height: 20%;
+	height: 15%;
 }
 
 @media screen and (max-width: 576px) {
