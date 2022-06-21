@@ -67,8 +67,3 @@ header {
 .todo-buttons {
 	height: 15%;
 }
-
-@media screen and (max-width: 576px) {
-	.to-do {
-	}
-}

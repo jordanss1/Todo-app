@@ -14,6 +14,12 @@
 
 let arrayOfTodoObjects = [];
 
+window.addEventListener("onload", e => {
+	let arrayOfObjectsForPageLoad = JSON.parse(localStorage.getItem("ToDo-List"));
+
+
+})
+
 
 const createTodoItemAndStorage = () => {
 	let textValueFromInput = document.getElementsByName("text-input")[0].value;
@@ -21,35 +27,43 @@ const createTodoItemAndStorage = () => {
 		return Math.floor(Math.random() * 9);
 	});
 
-	let newTodoObj = {
-		id: parseInt(uuid),
-		todo: textValueFromInput,
-	};
+	if (textValueFromInput) {
+		let newTodoObj = {
+			id: parseInt(uuid),
+			todo: textValueFromInput,
+		};
 
-	arrayOfTodoObjects.push(newTodoObj);
+		arrayOfTodoObjects.push(newTodoObj);
 
-	localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
+		localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
+
+	} else {
+		alert("You must enter text to display");
+	};	
 
 };
 
 
 const pushTextValueToCheckbox = () => {
+	let textValueFromInput = document.getElementsByName("text-input")[0].value;
 	let fieldForTodo = document.querySelector(".list");
 	const checkboxForTodo = document.createElement("input"); 
 	const checkboxLabelAndTodo = document.createElement("label");
 	const divForCheckAndLabel = document.createElement("div");
 	const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
-	containerDivOfTodoItems.classList.add("borderforcontainer");
  	
- 	arrayOfTodoObjects.forEach(obj => {
- 		checkboxForTodo.type = "checkbox";
- 		checkboxForTodo.id = obj.id;
- 		checkboxForTodo.name = "checkbox";
- 		checkboxLabelAndTodo.setAttribute("for", obj.id);
- 		checkboxLabelAndTodo.innerText = obj.todo;
- 		fieldForTodo.append(divForCheckAndLabel);
- 		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
- 	})
+ 	if (textValueFromInput) {
+	 	arrayOfTodoObjects.forEach(obj => {
+			containerDivOfTodoItems.classList.add("borderforcontainer");
+	 		checkboxForTodo.type = "checkbox";
+	 		checkboxForTodo.id = obj.id;
+	 		checkboxForTodo.name = "checkbox";
+	 		checkboxLabelAndTodo.setAttribute("for", obj.id);
+	 		checkboxLabelAndTodo.innerText = obj.todo;
+	 		fieldForTodo.append(divForCheckAndLabel);
+	 		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
+	 	})
+	};
 };
 
 
@@ -62,8 +76,7 @@ const deleteTodoItem = () => {
 
 		if (checkbox.checked && confirmation) {
 			arrayOfTodoObjects = arrayOfTodoObjects.filter(obj => {
-				return 	parseInt(checkbox.id) !== obj.id;
-				
+				return 	parseInt(checkbox.id) !== obj.id;	
 			});
 
 		checkbox.parentElement.remove();
