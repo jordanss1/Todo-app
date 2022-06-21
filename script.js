@@ -14,11 +14,34 @@
 
 let arrayOfTodoObjects = [];
 
-window.addEventListener("onload", e => {
+const storageAndArrayToDisplay = arrayOfObj => {
+
+	arrayOfObj.forEach(obj => {
+		let fieldForTodo = document.querySelector(".list");
+		const checkboxForTodo = document.createElement("input"); 
+		const checkboxLabelAndTodo = document.createElement("label");
+		const divForCheckAndLabel = document.createElement("div");
+		const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
+
+		containerDivOfTodoItems.classList.add("borderforcontainer");
+	 	checkboxForTodo.type = "checkbox";
+		checkboxForTodo.id = obj.id;
+		checkboxForTodo.name = "checkbox";
+		checkboxLabelAndTodo.setAttribute("for", obj.id);
+		checkboxLabelAndTodo.innerText = obj.todo;
+		fieldForTodo.append(divForCheckAndLabel);
+		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
+	});
+};	
+
+
+window.onload = function() {
 	let arrayOfObjectsForPageLoad = JSON.parse(localStorage.getItem("ToDo-List"));
 
-
-})
+	if (arrayOfObjectsForPageLoad) {
+		storageAndArrayToDisplay(arrayOfObjectsForPageLoad)
+	};
+};
 
 
 const createTodoItemAndStorage = () => {
@@ -44,25 +67,11 @@ const createTodoItemAndStorage = () => {
 };
 
 
-const pushTextValueToCheckbox = () => {
+const pushTextValueToCheckbox = () => { 
 	let textValueFromInput = document.getElementsByName("text-input")[0].value;
-	let fieldForTodo = document.querySelector(".list");
-	const checkboxForTodo = document.createElement("input"); 
-	const checkboxLabelAndTodo = document.createElement("label");
-	const divForCheckAndLabel = document.createElement("div");
-	const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
- 	
+	
  	if (textValueFromInput) {
-	 	arrayOfTodoObjects.forEach(obj => {
-			containerDivOfTodoItems.classList.add("borderforcontainer");
-	 		checkboxForTodo.type = "checkbox";
-	 		checkboxForTodo.id = obj.id;
-	 		checkboxForTodo.name = "checkbox";
-	 		checkboxLabelAndTodo.setAttribute("for", obj.id);
-	 		checkboxLabelAndTodo.innerText = obj.todo;
-	 		fieldForTodo.append(divForCheckAndLabel);
-	 		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
-	 	})
+	 	storageAndArrayToDisplay(arrayOfTodoObjects);
 	};
 };
 
