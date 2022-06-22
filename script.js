@@ -15,26 +15,25 @@
 let arrayOfTodoObjects = [];
 
 window.onload = () => {
-	let fieldForTodo = document.querySelector(".list");
-	const checkboxForTodo = document.createElement("input"); 
-	const checkboxLabelAndTodo = document.createElement("label");
-	const divForCheckAndLabel = document.createElement("div");
-	const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
-	const storedArray = JSON.parse(localStorage.getItem("ToDo-List"));
-	console.log(storedArray);
+	let arrayOfObjectsForPageLoad = JSON.parse(localStorage.getItem("ToDo-List"));
+	console.log(arrayOfObjectsForPageLoad);
 
- 	if (storedArray) {
- 		arrayOfTodoObjects = storedArray;
-	 	arrayOfTodoObjects.forEach(obj => {
+	if (arrayOfObjectsForPageLoad) {
+		arrayOfObjectsForPageLoad.forEach(obj => {
+			let fieldForTodo = document.querySelector(".list");
+			const checkboxForTodo = document.createElement("input"); 
+			const checkboxLabelAndTodo = document.createElement("label");
+			const divForCheckAndLabel = document.createElement("div");
+			const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
 			containerDivOfTodoItems.classList.add("borderforcontainer");
-	 		checkboxForTodo.type = "checkbox";
-	 		checkboxForTodo.id = obj.id;
-	 		checkboxForTodo.name = "checkbox";
-	 		checkboxLabelAndTodo.setAttribute("for", obj.id);
-	 		checkboxLabelAndTodo.innerText = obj.todo;
-	 		fieldForTodo.append(divForCheckAndLabel);
-	 		divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
-	 	})
+		 	checkboxForTodo.type = "checkbox";
+		 	checkboxForTodo.id = obj.id;
+		 	checkboxForTodo.name = "checkbox";
+			checkboxLabelAndTodo.setAttribute("for", obj.id);
+			checkboxLabelAndTodo.innerText = obj.todo;
+		 	fieldForTodo.append(divForCheckAndLabel);
+		 	divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);
+		});
 	};
 };
 
