@@ -15,16 +15,17 @@
 let arrayOfTodoObjects = [];
 
 window.onload = () => {
-	let arrayOfObjectsForPageLoad = JSON.parse(localStorage.getItem("ToDo-List"));
-	console.log(arrayOfObjectsForPageLoad);
 	let fieldForTodo = document.querySelector(".list");
 	const checkboxForTodo = document.createElement("input"); 
 	const checkboxLabelAndTodo = document.createElement("label");
 	const divForCheckAndLabel = document.createElement("div");
 	const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
- 	
- 	if (arrayOfObjectsForPageLoad) {
-	 	arrayOfObjectsForPageLoad.forEach(obj => {
+	const storedArray = JSON.parse(localStorage.getItem("ToDo-List"));
+	console.log(storedArray);
+
+ 	if (storedArray) {
+ 		arrayOfTodoObjects = storedArray;
+	 	arrayOfTodoObjects.forEach(obj => {
 			containerDivOfTodoItems.classList.add("borderforcontainer");
 	 		checkboxForTodo.type = "checkbox";
 	 		checkboxForTodo.id = obj.id;
