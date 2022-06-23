@@ -6,12 +6,13 @@
 in the string as a random number between 0 and 9, to be used with the todo item submitted.
 
 2. Create an object called "newTodoObj" that will store the UUID as value to "id" as well as the todo item to property "todo".
-"pushValueToCheckbox" function, which is defined earlier, takes the "newTodoObj" as an argument in order to push the objects
-todo bvalue straight to the HTML. The push method is used to store this object inside of the array "arrayOfTodoObjects". We want the array stored in 
+"storeAndDisplayObjectTodos" function, which is defined earlier, takes the "newTodoObj" as an argument in order to push the objects
+todo value straight to the HTML. This function also appends elements to the HTML in other functions as well. 
+The push method is used to store this object inside of the array "arrayOfTodoObjects". We want the array stored in 
 localStorage everytime a new object is created, so at the end of the function setItem() is called on localStorage to store 
 the object after it's been converted to a string.
 
-3. createTodoItemAndStorage is called inside of the submit button event listener. pushValueToCheckbox is a function that displays the submitted todo items with their own checkbox inside of a div. 
+3. createTodoItemAndStorage is called inside of the submit button event listener. This function displays the submitted todo items with their own checkbox inside of a div. 
 This div is used so each item is structured neatly by the HTML which aligns the item with flex-row. The forEach method allows 
 us to set the values of the elements assigned to the values of the corresponding object. 
 
@@ -25,9 +26,6 @@ in the original array, removing the objects that the user deleted.
 is overwritten with the new array of object/s. This function is then called inside of the delete button event listener so 
 that everytime the button is clicked the objects that need to be removed, are removed.
 */
-
-let arrayOfTodoObjects = [];
-
 
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
@@ -50,7 +48,8 @@ const fetchApi = () => {
 	axios.get('https://jsonplaceholder.typicode.com/todos/')
 
 		.then(response => {
-			response.forEach(obj => {
+			console.log(response.data);
+			response.data.forEach(obj => {
 				storeAndDisplayObjectTodos(obj);
 				arrayOfTodoObjects.push(obj);
 				localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
@@ -66,19 +65,12 @@ window.onload = () => {
 
 	if (arrayOfTodoObjects) {
 		arrayOfTodoObjects.forEach(obj => {
-			storeAndDisplayObjectTodos(obj);
-		})
+		storeAndDisplayObjectTodos(obj)});
 	} else {
-		fetchApi();
-	};
+	   fetchApi();
+	}
 	
 };
-
-
-const pushTextValueToCheckbox = (obj) => {
-	storeAndDisplayObjectTodos(obj)	
-};
-
 
 const createTodoItemAndStorage = () => {
 	let textValueFromInput = document.getElementsByName("text-input")[0].value;
@@ -92,7 +84,7 @@ const createTodoItemAndStorage = () => {
 			title: textValueFromInput,
 		};
 
-		pushTextValueToCheckbox(newTodoObj);
+		storeAndDisplayObjectTodos(newTodoObj);
 
 		arrayOfTodoObjects.push(newTodoObj);
 
@@ -136,6 +128,17 @@ document.getElementsByName("delete")[0].addEventListener("click", e => {
 	e.preventDefault();
 	deleteTodoItem();
 });
+
+document.querySelectorAll("input[name=checkbox]").forEach(checkbox => {
+	checkbox.addEventListener("change", e => {
+		const deleteAllChecks = document.getElementById("delete-div");
+
+		if (e.target.checked) {
+			deleteAllChecks.style.visibility = "visible";
+		}
+	});
+});
+
 
 
 

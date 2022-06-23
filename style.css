@@ -60,8 +60,15 @@ header {
 	width: 100%;
 }
 
+#delete-div {
+	visibility: hidden;
+	font-family: 'Nunito Sans', sans-serif;
+	color: white;
+	letter-spacing: 1px;
+}
+
 .todo-text {
-	height: 15%;
+	height: 20%;
 }
 
 .todo-buttons {
