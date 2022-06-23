@@ -41,12 +41,12 @@ const storeAndDisplayObjectTodos = (obj) => {
 		checkboxForTodo.id = obj.id;
 	 	checkboxForTodo.name = "checkbox";
 		checkboxLabelAndTodo.setAttribute("for", obj.id);
-		checkboxLabelAndTodo.innerText = obj.todo;
+		checkboxLabelAndTodo.innerText = obj.title;
 	 	fieldForTodo.append(divForCheckAndLabel);
 	 	divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);			
 };
 
-const fetchAPI = () => {
+const fetchApi = () => {
 	axios.get('https://jsonplaceholder.typicode.com/todos/')
 
 		.then(response => {
@@ -57,7 +57,7 @@ const fetchAPI = () => {
 			})
 		});
 
-		.catch(error => error.alert("Could not get todos"));
+		//.catch(error => error.alert("Could not get todos"));
 };
 
 window.onload = () => {
@@ -69,7 +69,7 @@ window.onload = () => {
 			storeAndDisplayObjectTodos(obj);
 		})
 	} else {
-		fetchAPI();
+		fetchApi();
 	};
 	
 };
@@ -89,7 +89,7 @@ const createTodoItemAndStorage = () => {
 	if (textValueFromInput) {
 		let newTodoObj = {
 			id: parseInt(uuid),
-			todo: textValueFromInput,
+			title: textValueFromInput,
 		};
 
 		pushTextValueToCheckbox(newTodoObj);
