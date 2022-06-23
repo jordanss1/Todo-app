@@ -53,7 +53,7 @@ const fetchApi = () => {
 			response.forEach(obj => {
 				storeAndDisplayObjectTodos(obj);
 				arrayOfTodoObjects.push(obj);
-				localStorage.setItem("ToDo-List", arrayOfTodoObjects);
+				localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
 			})
 		});
 
