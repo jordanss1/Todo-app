@@ -14,10 +14,6 @@
 
 let arrayOfTodoObjects = [];
 
-const fetchAPI = () => {
-	axious.get('https://reqres.in/api/users');
-};
-
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
 		const checkboxForTodo = document.createElement("input"); 
