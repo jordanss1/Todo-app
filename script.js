@@ -1,22 +1,33 @@
 //Build a ToDo App. A user must be able to add and delete a todo item, from the UI and from your storage. Save each todo item as an object, with //a key for the todo text and an "id" key that represents a random number you can use to search it by. So, you should have an //array of objects that you're saving in localStorage.
 
 /*
-1. Initialise an array "arrayOfTodoObjects" which will hold the users submitted list. Create a function expression called "createTodoItemAndStorage" that takes a string with many "x" and uses the .replace method on the string to return each "x" in the string as a random number between 0 and 9, to be used with the todo item submitted.
+1. Initialise an array "arrayOfTodoObjects" which will hold the users submitted list. Create a function expression called 
+"createTodoItemAndStorage" that takes a string with many "x" and uses the .replace method on the string to return each "x" 
+in the string as a random number between 0 and 9, to be used with the todo item submitted.
 
-2. Create an object called "newTodoObj" that will store the UUID as value to "id" as well as the todo item to property "todo". The push method is used to store this object inside of the array "arrayOfTodoObjects". We want the array stored in localStorage everytime a new object is created, so at the end of the function setItem() is called on localStorage to store the object after it's been converted to a string.
+2. Create an object called "newTodoObj" that will store the UUID as value to "id" as well as the todo item to property "todo".
+"pushValueToCheckbox" function, which is defined earlier, takes the "newTodoObj" as an argument in order to push the objects
+todo bvalue straight to the HTML. The push method is used to store this object inside of the array "arrayOfTodoObjects". We want the array stored in 
+localStorage everytime a new object is created, so at the end of the function setItem() is called on localStorage to store 
+the object after it's been converted to a string.
 
-3. createTodoItemAndStorage and "pushValueToCheckbox" are called inside of the submit button event listener. pushValueToCheckbox is a function that displays the submitted todo items with their own checkbox inside of a div. This div is used so each item is structured neatly by the HTML which aligns the item with flex-row. The forEach method allows us to set the values of the elements assigned to the values of the corresponding object. 
+3. createTodoItemAndStorage is called inside of the submit button event listener. pushValueToCheckbox is a function that displays the submitted todo items with their own checkbox inside of a div. 
+This div is used so each item is structured neatly by the HTML which aligns the item with flex-row. The forEach method allows 
+us to set the values of the elements assigned to the values of the corresponding object. 
 
-4. The final part of the project I must allow the user to delete the todo items as they wish. For this I initialised "deleteTodoItem" and defined all the checkboxes at the top in an array. forEach is used on this array, with an if statement nested that checks if any of the checkboxes are checked and if the confirmation is true, if so, the following line of code filters any of the objects that do not match the checkbox IDs that are checked, these are then returned to and re-initialised in the original array.
+4. The final part of the project I must allow the user to delete the todo items as they wish. For this I initialised 
+"deleteTodoItem" and defined all the checkboxes that may be in the HTML, at the top in an array. forEach is used on this array, 
+with an if statement nested that checks if any of the checkboxes are checked and if the confirmation is true, if so, the following line of code 
+filters any of the objects that do not match the checkbox IDs that are checked, these are then returned to and re-initialised 
+in the original array, removing the objects that the user deleted.
 
-5. The div that holds the checkbox is removed, clearing the item and the space. Then the "ToDo-list" item inside localStorage is overwritten with the new array of object/s. This function is then called inside of the delete button event listener so that everytime the button is clicked the objects that need to be removed, are removed.
+5. The div that holds the checkbox is removed, clearing the item and the space. Then the "ToDo-list" item inside localStorage 
+is overwritten with the new array of object/s. This function is then called inside of the delete button event listener so 
+that everytime the button is clicked the objects that need to be removed, are removed.
 */
 
 let arrayOfTodoObjects = [];
 
-const fetchAPI = () => {
-	axios.get('https://jsonplaceholder.typicode.com/todos/1')
-};
 
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
@@ -35,6 +46,20 @@ const storeAndDisplayObjectTodos = (obj) => {
 	 	divForCheckAndLabel.append(checkboxForTodo, checkboxLabelAndTodo);			
 };
 
+const fetchAPI = () => {
+	axios.get('https://jsonplaceholder.typicode.com/todos/')
+
+		.then(response => {
+			response.forEach(obj => {
+				storeAndDisplayObjectTodos(obj);
+				arrayOfTodoObjects.push(obj);
+				localStorage.setItem("ToDo-List", arrayOfTodoObjects);
+			})
+		});
+
+		.catch(error => error.alert("Could not get todos"));
+};
+
 window.onload = () => {
 	arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));
 	console.log(arrayOfTodoObjects);
@@ -43,9 +68,12 @@ window.onload = () => {
 		arrayOfTodoObjects.forEach(obj => {
 			storeAndDisplayObjectTodos(obj);
 		})
-	
+	} else {
+		fetchAPI();
 	};
+	
 };
+
 
 const pushTextValueToCheckbox = (obj) => {
 	storeAndDisplayObjectTodos(obj)	
