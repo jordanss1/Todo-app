@@ -14,6 +14,10 @@
 
 let arrayOfTodoObjects = [];
 
+const fetchAPI = () => {
+	axios.get('https://jsonplaceholder.typicode.com/todos/1')
+}
+
 window.onload = () => {
 	let arrayOfObjectsForPageLoad = JSON.parse(localStorage.getItem("ToDo-List"));
 	console.log(arrayOfObjectsForPageLoad);
