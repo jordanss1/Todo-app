@@ -25,6 +25,16 @@ in the original array, removing the objects that the user deleted.
 5. The div that holds the checkbox is removed, clearing the item and the space. Then the "ToDo-list" item inside localStorage 
 is overwritten with the new array of object/s. This function is then called inside of the delete button event listener so 
 that everytime the button is clicked the objects that need to be removed, are removed.
+
+UPDATES FOR API PART OF PROJECT
+
+6. Initialised the fetchAPI functionto pull through the API with the todos. A promise was created that takes the object
+and uses forEach to loop through every object and append the todos to the HTML and push the objects to the array and then set 
+each object to localStorage. 
+
+7. An if statement added to the onload event that will append the arrayOfTodoObjects if the array has any objects and if not, 
+the fetchAPI function is called to append the HTML with todos. A click event added to the "select all" html checkbox, which checks
+if the checkbox has been checked and if so, it checks all the checkboxes of the todo list. If unchecked, it unchecks all the checkboxes.
 */
 
 const storeAndDisplayObjectTodos = (obj) => {
@@ -63,7 +73,11 @@ window.onload = () => {
 	arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));
 	console.log(arrayOfTodoObjects);
 
-	if (arrayOfTodoObjects) {
+	document.querySelectorAll("input[type=checkbox]").forEach(checkbox => {
+		checkbox.checked = false;
+	})
+
+	if (arrayOfTodoObjects.length > 0) {
 		arrayOfTodoObjects.forEach(obj => {
 		storeAndDisplayObjectTodos(obj)});
 	} else {
@@ -129,15 +143,20 @@ document.getElementsByName("delete")[0].addEventListener("click", e => {
 	deleteTodoItem();
 });
 
-document.querySelectorAll("input[name=checkbox]").forEach(checkbox => {
-	checkbox.addEventListener("change", e => {
-		const deleteAllChecks = document.getElementById("delete-div");
+document.querySelector("input[name=check-all]").addEventListener("click", e => {
+	const allCheckboxes = document.querySelectorAll("input[name=checkbox]");
 
-		if (e.target.checked) {
-			deleteAllChecks.style.visibility = "visible";
-		}
-	});
+	if (e.target.checked) {
+		allCheckboxes.forEach(checkbox => {
+			checkbox.checked = true;
+		})
+	} else {
+		allCheckboxes.forEach(checkbox => {
+		checkbox.checked = false;
+		})
+	}
 });
+
 
 
 
