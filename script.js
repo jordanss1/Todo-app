@@ -37,11 +37,15 @@ the fetchAPI function is called to append the HTML with todos. A click event add
 if the checkbox has been checked and if so, it checks all the checkboxes of the todo list. If unchecked, it unchecks all the checkboxes.
 */
 
+let arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));
+
+
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
 		const checkboxForTodo = document.createElement("input"); 
 		const checkboxLabelAndTodo = document.createElement("label");
 		const divForCheckAndLabel = document.createElement("div");
+		const divForInput = document.createElement("div");
 		const containerDivOfTodoItems = document.getElementsByClassName("list")[0];
 
 		containerDivOfTodoItems.classList.add("borderforcontainer");
@@ -58,7 +62,6 @@ const fetchApi = () => {
 	axios.get('https://jsonplaceholder.typicode.com/todos/')
 
 		.then(response => {
-			console.log(response.data);
 			response.data.forEach(obj => {
 				storeAndDisplayObjectTodos(obj);
 				arrayOfTodoObjects.push(obj);
@@ -104,6 +107,7 @@ const createTodoItemAndStorage = () => {
 
 		localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
 
+
 	} else {
 		alert("You must enter text to display");
 	};	
@@ -126,7 +130,7 @@ const deleteTodoItem = () => {
 
 		checkbox.parentElement.remove();
 		localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
-
+		console.log(JSON.parse(localStorage.getItem("ToDo-List")));
 		};
 	});
 };
