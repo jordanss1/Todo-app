@@ -37,8 +37,9 @@ the fetchAPI function is called to append the HTML with todos. A click event add
 if the checkbox has been checked and if so, it checks all the checkboxes of the todo list. If unchecked, it unchecks all the checkboxes.
 */
 
-let arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));
+let arrayOfTodoObjects = [];
 
+localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
 
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
