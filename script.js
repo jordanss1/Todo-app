@@ -28,7 +28,7 @@ set the values of the elements assigned to the values of the corresponding objec
  so that everytime the button is clicked the objects that need to be removed, are removed.
 */
 
-let arrayOfTodoObjects = [];
+let arrayOfTodoObjects = localStorage.getItem("ToDo-List");
 
 const storeAndDisplayObjectTodos = (obj) => {
 		let fieldForTodo = document.querySelector(".list");
