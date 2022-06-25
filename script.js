@@ -1,6 +1,6 @@
 //Build a ToDo App. A user must be able to add and delete a todo item, from the UI and from your storage. 
-Save each todo item as an object, with //a key for the todo text and an "id" key that represents a random 
-number you can use to search it by. So, you should have an //array of objects that you're saving in localStorage.
+//Save each todo item as an object, with //a key for the todo text and an "id" key that represents a random 
+//number you can use to search it by. So, you should have an //array of objects that you're saving in localStorage.
 
 /*
 1. Initialise an array "arrayOfTodoObjects" which will hold the users submitted list. Create a function expression called 
@@ -51,7 +51,7 @@ window.onload = () => {
 	arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));
 	console.log(arrayOfTodoObjects);
 
-	if (arrayOfTodoObjects) {
+	if (arrayOfTodoObjects.length > 0) {
 		arrayOfTodoObjects.forEach(obj => {
 			storeAndDisplayObjectTodos(obj);
 		})
