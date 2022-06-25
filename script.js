@@ -130,7 +130,6 @@ const deleteTodoItem = () => {
 
 		checkbox.parentElement.remove();
 		localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
-		console.log(JSON.parse(localStorage.getItem("ToDo-List")));
 		};
 	});
 };
