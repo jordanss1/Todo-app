@@ -81,12 +81,12 @@ const fetchApi = (arr) => {
 
 			arrayOfTodoObjects.forEach(obj => {
 				storeAndDisplayObjectTodos(obj);
-				localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
 			})
 
-		});
+			localStorage.setItem("ToDo-List", JSON.stringify(arrayOfTodoObjects));
 
-		//.catch(error => error.alert("Could not get todos"));
+
+		});
 };
 
 
@@ -109,9 +109,9 @@ window.onload = () => {
 
 
 const createTodoItemAndStorage = () => {
-	let arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));	
-	let textValueFromInput = document.getElementsByName("text-input")[0].value;
-	let uuid = "xxxxxxxxxxxxxxxxxx".replace(/x/g, () => {
+	const arrayOfTodoObjects = JSON.parse(localStorage.getItem("ToDo-List"));	
+	const textValueFromInput = document.getElementsByName("text-input")[0].value;
+	const uuid = "xxxxxxxxxxxxxxxxxx".replace(/x/g, () => {
 		return Math.floor(Math.random() * 9);
 	});
 
