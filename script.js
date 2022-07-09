@@ -68,7 +68,7 @@ const storeAndDisplayObjectTodos = (obj) => {
 
 
 
-const fetchApi = (arr) => {
+const fetchApi = () => {
 	let arrayOfTodoObjects = [];
 
 	axios.get('https://jsonplaceholder.typicode.com/todos/')
